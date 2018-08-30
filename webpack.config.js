@@ -1,10 +1,10 @@
 const webpack = require("webpack");
 const path = require("path");
-const cssExtracter = require("mini-css-extract-plugin");
+const cssExtract = require("mini-css-extract-plugin");
 const cssMinimizer = require("optimize-css-assets-webpack-plugin");
 const jsMinimizer = require("uglifyjs-webpack-plugin");
 
-module.export = {
+module.exports = {
     entry: "./src/index.js",
     output: {
         filename: "bundle.js",
@@ -13,13 +13,13 @@ module.export = {
     optimization: {
         minimizer: [
             new jsMinimizer({
-                parallel: true // this will improve the process speed
+                parallel: true
             }),
             new cssMinimizer({})
         ]
-    },
-    plugins: [
-        new cssExtracter({
+    } ,
+    plugins:[
+        new cssExtract({
             filename: "index.css",
             chunkFilename: "[id].css"
         })
@@ -31,8 +31,8 @@ module.export = {
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
-                    options: {
-                        presets: ["env"]
+                    options:{
+                        presets:["env"]
                     }
                 }
             },
@@ -40,7 +40,7 @@ module.export = {
                 test: /\.scss$/,
                 exclude: /node_modules/,
                 use: [
-                    cssExtracter.loader,
+                    cssExtract.loader,
                     "css-loader",
                     "sass-loader",
                     "postcss-loader"
@@ -50,8 +50,8 @@ module.export = {
     },
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
-        hot: true,
+        hot:true,
         open: true,
-        port: 10023
+        port: 10021
     }
 };

@@ -1,0 +1,16 @@
+$bgColor: white;
+$globalFontSize: 4rem;
+
+html {
+    background-color: $bgColor;
+    font-size: 62.5%;
+    body {
+        font-size: $globalFontSize;  
+        margin: 0;
+        canvas {
+            border: 1px solid transparent;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
