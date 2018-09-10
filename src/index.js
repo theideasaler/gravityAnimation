@@ -4,11 +4,11 @@ import $ from 'jquery';
 let canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 let colorArray = [
-    '#133046',
-    '#15959F',
-    '#F1E4B3',
-    '#F4A090',
-    '#F26144'
+    '#233D4D',
+    '#FE7F2D',
+    '#FCCA46',
+    '#A1C181',
+    '#579C87'
 ];
 let middleX = window.innerWidth / 2;
 let middleY = window.innerHeight / 2;
@@ -33,13 +33,14 @@ class Particle {
         this.x = x;
         this.y = y;
         this.dy = velocityY;
+        this.basicEnergyLost = 0.96 * radius;
         this.radius = radius;
         this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
     }
     update() {
         if (this.y + this.radius > canvas.height){
-            this.dy = - this.dy;
-        }else this.dy += 1;
+            this.dy = - this.dy * 0.96;//multiply the energy lost
+        }else this.dy += 1;//this number this the gravity force placed vertically
         this.y += this.dy;
         this.draw();
     }
@@ -63,7 +64,7 @@ const init = () => {
     particles = [];
     for (let i = 0; i < 1; i++) {
         const randomRadius = getRange(20,25);
-        particles.push(new Particle(mouse.x, mouse.y, randomRadius, 3));
+        particles.push(new Particle(mouse.x, mouse.y, randomRadius, 0));
     } 
 };
 
