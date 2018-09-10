@@ -62,9 +62,10 @@ const init = () => {
     canvas.width = 2 * middleX;
     particles = [];
     for (let i = 0; i < 100; i++) {
-        const randomRadius = getRange(5,25);
+        const randomRadius = getRange(5, 25);
+        const randomY = getRange(window.innerHeight / 3 + randomRadius, window.innerHeight * 2 / 3 + randomRadius);
         const randomX = getRange(randomRadius, middleX * 2 - randomRadius);
-        particles.push(new Particle(randomX, middleY, randomRadius, 0));
+        particles.push(new Particle(randomX, randomY, randomRadius, 0));
     } 
 };
 
