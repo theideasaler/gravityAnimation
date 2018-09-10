@@ -26,20 +26,26 @@ window.addEventListener('mousemove', event => {
 
 canvas.height = 2 * middleY;
 canvas.width = 2 * middleX;
-
+let gravity =1;
 class Particle {
-    constructor(x, y, radius, velocityY) {
+    constructor(x, y, radius, velocityX, velocityY) {
         this.x = x;
         this.y = y;
+        this.dx = velocityX;
         this.dy = velocityY;
         this.basicEnergyLost = 0.96 * radius;
         this.radius = radius;
         this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
     }
     update() {
-        if (this.y + this.radius > canvas.height){
+        if (this.y + this.radius + this.dy > canvas.height){
             this.dy = - this.dy * 0.96;//multiply the energy lost
-        }else this.dy += 1;//this number this the gravity force placed vertically
+        }else this.dy += gravity;//this number this the gravity force placed vertically
+        
+        if (this.x + this.radius + this.dx > canvas.width || this.x - this.radius + this.dx < 0){
+            this.dx = - this.dx * 0.96;//multiply the energy lost
+        }
+        this.x += this.dx;
         this.y += this.dy;
         this.draw();
     }
@@ -61,11 +67,12 @@ const init = () => {
     canvas.height = 2 * middleY;
     canvas.width = 2 * middleX;
     particles = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 120; i++) {
         const randomRadius = getRange(5, 25);
-        const randomY = getRange(window.innerHeight / 3 + randomRadius, window.innerHeight * 2 / 3 + randomRadius);
+        const randomY = getRange(randomRadius, window.innerHeight * 2 / 3 + randomRadius);
         const randomX = getRange(randomRadius, middleX * 2 - randomRadius);
-        particles.push(new Particle(randomX, randomY, randomRadius, 0));
+        const randomVelX = getRange(-2, 2);
+        particles.push(new Particle(randomX, randomY, randomRadius, randomVelX, 0));
     } 
 };
 
