@@ -16,7 +16,6 @@ let mouse = {
     x: middleX,
     y: middleY
 };
-let becomeCircleFlag = false;
 window.addEventListener('mousemove', event => {
     
     if(isNaN(mouse.x)) { mouse.x = middleX; }
@@ -62,9 +61,10 @@ const init = () => {
     canvas.height = 2 * middleY;
     canvas.width = 2 * middleX;
     particles = [];
-    for (let i = 0; i < 1; i++) {
-        const randomRadius = getRange(20,25);
-        particles.push(new Particle(mouse.x, mouse.y, randomRadius, 0));
+    for (let i = 0; i < 100; i++) {
+        const randomRadius = getRange(5,25);
+        const randomX = getRange(randomRadius, middleX * 2 - randomRadius);
+        particles.push(new Particle(randomX, middleY, randomRadius, 0));
     } 
 };
 
