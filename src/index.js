@@ -71,7 +71,7 @@ const init = () => {
     canvas.height = 2 * middleY;
     canvas.width = 2 * middleX;
     particles = [];
-    for (let i = 0; i < 180; i++) {
+    for (let i = 0; i < 200; i++) {
         const randomRadius = getRange(minR, maxR);
         const randomY = getRange(randomRadius, window.innerHeight * 2 / 3 + randomRadius);
         const randomX = getRange(randomRadius, middleX * 2 - randomRadius);
